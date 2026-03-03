@@ -1,0 +1,20 @@
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.oceanviewresort.controller.ReservationTableController"
+      stylesheets="@../css/style.css">
+
+    <Label text="All Reservations" styleClass="section-title"/>
+
+    <TableView fx:id="reservationTable">
+
+        <columns>
+            <TableColumn text="ID" fx:id="colID"/>
+            <TableColumn text="Guest Name" fx:id="colGuest"/>
+            <TableColumn text="Room Type" fx:id="colRoomType"/>
+            <TableColumn text="Check In" fx:id="colCheckIn"/>
+            <TableColumn text="Check Out" fx:id="colCheckOut"/>
+            <TableColumn text="Status" fx:id="colStatus"/>
+        </columns>
+
+    </TableView>
+
+</VBox>

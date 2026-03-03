@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.oceanviewresort.controller.DashboardController"
+            stylesheets="@../css/style.css">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox styleClass="top-bar" alignment="CENTER_RIGHT">
+            <Label text="Ocean View Resort" styleClass="title-label"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userRoleLabel"/>
+        </HBox>
+    </top>
+
+    <!-- LEFT SIDEBAR -->
+    <left>
+        <VBox styleClass="sidebar" spacing="10">
+
+            <Button text="Dashboard" onAction="#loadHome"/>
+            <Button text="Reservations" onAction="#loadReservations"/>
+            <Button text="Billing" onAction="#loadBilling"/>
+            <Button text="Reports" onAction="#loadReports"/>
+            <Button text="Admin Panel" onAction="#loadAdminPanel"/>
+            <Button text="Logout" onAction="#logout"/>
+
+        </VBox>
+    </left>
+
+    <!-- CENTER CONTENT -->
+    <center>
+        <StackPane fx:id="contentArea"/>
+    </center>
+
+</BorderPane>

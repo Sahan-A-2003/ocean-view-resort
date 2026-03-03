@@ -59,5 +59,9 @@ public class ReservationService {
         }
     }
 
+    public boolean cancelReservation(int reservationID) {
+        return reservationDAO.updateStatus(reservationID, "Cancelled");
+    }
+
 
 }

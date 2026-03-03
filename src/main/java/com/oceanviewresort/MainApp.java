@@ -1,23 +1,33 @@
 package com.oceanviewresort;
 
-import com.oceanviewresort.config.DBConnection;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
+
     @Override
     public void start(Stage primaryStage) {
-        /* ====== TEST DATABASE CONNECTION ======
         try {
-            DBConnection connection = DBConnection.getInstance();
-            System.out.println("Connection object: " + connection.getConnection());
+            // Load Login View FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
+            Parent root = loader.load();
+
+            // Create scene and apply CSS
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+
+            // Set stage properties
+            primaryStage.setTitle("Ocean View Resort Management System");
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false); // optional: prevent resizing
+            primaryStage.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        */
-
-        primaryStage.setTitle("Ocean View Resort Management System");
-        primaryStage.show();
     }
 
     public static void main(String[] args) {
