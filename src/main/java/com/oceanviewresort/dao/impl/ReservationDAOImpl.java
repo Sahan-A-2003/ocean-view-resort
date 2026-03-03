@@ -130,4 +130,34 @@ public class ReservationDAOImpl implements ReservationDAO {
             return false;
         }
     }
+
+    public int countBookedRooms(String roomType,
+                                java.time.LocalDate checkIn,
+                                java.time.LocalDate checkOut) {
+
+        String sql = "SELECT SUM(numberOfRooms) as total " +
+                "FROM reservations " +
+                "WHERE roomType=? " +
+                "AND status='Booked' " +
+                "AND checkInDate < ? " +
+                "AND checkOutDate > ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, roomType);
+            stmt.setDate(2, java.sql.Date.valueOf(checkOut));
+            stmt.setDate(3, java.sql.Date.valueOf(checkIn));
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("total");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 }
