@@ -7,14 +7,14 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
-        // ====== TEST DATABASE CONNECTION ======
+        /* ====== TEST DATABASE CONNECTION ======
         try {
             DBConnection connection = DBConnection.getInstance();
             System.out.println("Connection object: " + connection.getConnection());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // =======================================
+        */
 
         primaryStage.setTitle("Ocean View Resort Management System");
         primaryStage.show();
