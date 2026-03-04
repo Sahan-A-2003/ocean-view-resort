@@ -1,5 +1,7 @@
 package com.oceanviewresort.controller;
 
+import com.oceanviewresort.model.User;
+import com.oceanviewresort.service.impl.AuthServiceImpl;
 import com.oceanviewresort.util.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,25 +32,38 @@ public class LoginController {
         String username = usernameField.getText().trim();
         String password = passwordField.getText().trim();
 
-        // Simulate authentication (replace with real DB auth)
-        String role;
-        if (username.equals("admin")) {
-            role = "ADMIN";
-        } else if (username.equals("user")) {
-            role = "USER";
-        } else {
-            messageLabel.setText("Invalid credentials!");
+        if (username.isEmpty() || password.isEmpty()) {
+            messageLabel.setText("Please enter username and password!");
             return;
         }
 
-        // Store user session
-        SessionManager.getInstance().setUser(username, role);
+        try {
+            AuthServiceImpl authService = new AuthServiceImpl();
+            User user = authService.login(username, password);
 
-        // Redirect based on role
-        if (role.equals("ADMIN")) {
-            openDashboard("/view/Dashboard.fxml", username, role);
-        } else if (role.equals("USER")) {
-            openDashboard("/view/UserDashboard.fxml", username, role);
+            if (user == null) {
+                messageLabel.setText("Invalid username or password!");
+                return;
+            }
+
+            // Store session
+            SessionManager.getInstance()
+                    .setUser(user.getUsername(), user.getRole());
+
+            // Redirect based on role
+            if (user.getRole().equalsIgnoreCase("ADMIN")) {
+                openDashboard("/view/DashboardView.fxml",
+                        user.getUsername(),
+                        user.getRole());
+            } else {
+                openDashboard("/view/UserDashboard.fxml",
+                        user.getUsername(),
+                        user.getRole());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            messageLabel.setText("Database error!");
         }
     }
 
@@ -72,6 +87,7 @@ public class LoginController {
             Stage stage = (Stage) loginButton.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle(role.equals("ADMIN") ? "Admin Dashboard" : "User Dashboard");
+            stage.setMaximized(true);
             stage.show();
 
         } catch (IOException e) {

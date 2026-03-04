@@ -11,8 +11,6 @@ public class DashboardController {
 
     @FXML private Label userRoleLabel;
     @FXML private StackPane contentArea;
-    @FXML
-    private Label welcomeLabel;
 
     @FXML
     public void initialize() {
@@ -46,6 +44,7 @@ public class DashboardController {
     }
 
     public void setUser(String username) {
-        welcomeLabel.setText("Welcome, " + username + " (User)");
+        String role = SessionManager.getInstance().getRole();
+        userRoleLabel.setText("Welcome, " + username + " | Role: " + role);
     }
 }
