@@ -8,7 +8,7 @@ public class DBConnection {
 
     // Single instance
     private static DBConnection instance;
-    private Connection connection;
+    private static Connection connection;
 
     // Database credentials
     private final String URL = "jdbc:mysql://localhost:3306/oceanviewresort";
@@ -35,7 +35,7 @@ public class DBConnection {
         return instance;
     }
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         return connection;
     }
 }

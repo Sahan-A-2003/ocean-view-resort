@@ -23,4 +23,9 @@ public class SessionManager {
     public String getRole() {
         return role;
     }
+
+    public void clearSession() {
+        this.username = null;
+        this.role = null;
+    }
 }

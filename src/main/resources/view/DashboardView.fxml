@@ -2,6 +2,7 @@
 
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.oceanviewresort.controller.DashboardController"
@@ -9,30 +10,75 @@
 
     <!-- TOP BAR -->
     <top>
-        <HBox styleClass="top-bar" alignment="CENTER_RIGHT">
-            <Label text="Ocean View Resort" styleClass="title-label"/>
+        <HBox styleClass="top-bar" alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets top="15" right="25" bottom="15" left="25"/>
+            </padding>
+
+            <Label text="🌊 Ocean View Resort"
+                   styleClass="title-label"/>
+
             <Region HBox.hgrow="ALWAYS"/>
-            <Label fx:id="userRoleLabel"/>
+
+            <Label text="Logged in as:"
+                   styleClass="top-small-label"/>
+
+            <Label fx:id="userRoleLabel"
+                   styleClass="role-label"/>
         </HBox>
     </top>
 
     <!-- LEFT SIDEBAR -->
     <left>
-        <VBox styleClass="sidebar" spacing="10">
+        <VBox styleClass="sidebar" spacing="15" alignment="TOP_CENTER">
+            <padding>
+                <Insets top="30" right="20" bottom="30" left="20"/>
+            </padding>
 
-            <Button text="Dashboard" onAction="#loadHome"/>
-            <Button text="Reservations" onAction="#loadReservations"/>
-            <Button text="Billing" onAction="#loadBilling"/>
-            <Button text="Reports" onAction="#loadReports"/>
-            <Button text="Admin Panel" onAction="#loadAdminPanel"/>
-            <Button text="Logout" onAction="#logout"/>
+            <Label text="MENU" styleClass="menu-title"/>
 
+            <Button text="Dashboard" styleClass="sidebar-button" onAction="#loadHome"/>
+            <Button text="Reservations" styleClass="sidebar-button" onAction="#loadReservations"/>
+            <Button text="Billing" styleClass="sidebar-button" onAction="#loadBilling"/>
+            <Button text="Reports" styleClass="sidebar-button" onAction="#loadReports"/>
+            <Button text="Admin Panel" styleClass="sidebar-button" onAction="#loadAdminPanel"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Logout" styleClass="logout-button" onAction="#logout"/>
         </VBox>
     </left>
 
     <!-- CENTER CONTENT -->
     <center>
-        <StackPane fx:id="contentArea"/>
+        <ScrollPane fitToWidth="true" styleClass="center-scroll">
+            <VBox spacing="30" styleClass="center-container">
+                <padding>
+                    <Insets top="30" right="40" bottom="30" left="40"/>
+                </padding>
+
+                <!-- Available Rooms Section -->
+                <VBox spacing="15">
+                    <Label text="Available Rooms"
+                           styleClass="section-title"/>
+
+                    <FlowPane fx:id="availableRoomsPane"
+                              hgap="20"
+                              vgap="20"/>
+                </VBox>
+
+                <!-- Available Discounts Section -->
+                <VBox spacing="15">
+                    <Label text="Available Discounts"
+                           styleClass="section-title"/>
+
+                    <FlowPane fx:id="availableDiscountPane"
+                              hgap="20"
+                              vgap="20"/>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
     </center>
 
 </BorderPane>

@@ -1,31 +1,93 @@
 .root {
     -fx-font-family: "Segoe UI";
+    -fx-background-color: #f4f6f9;
 }
 
+/* ================= TOP BAR ================= */
 .top-bar {
-    -fx-background-color: #0d3b66;
-    -fx-padding: 15;
+    -fx-background-color: linear-gradient(to right, #0d3b66, #1d3557);
 }
 
 .title-label {
     -fx-text-fill: white;
-    -fx-font-size: 20px;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
 }
 
+.top-small-label {
+    -fx-text-fill: #dce3ea;
+    -fx-font-size: 13px;
+}
+
+.role-label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* ================= SIDEBAR ================= */
 .sidebar {
     -fx-background-color: #1d3557;
-    -fx-padding: 20;
+    -fx-pref-width: 220;
 }
 
-.sidebar .button {
-    -fx-background-color: #457b9d;
+.menu-title {
     -fx-text-fill: white;
-    -fx-pref-width: 150;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-pref-width: 180;
+    -fx-padding: 10 0 10 0;
+    -fx-background-radius: 8;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: #457b9d;
+    -fx-cursor: hand;
+}
+
+.logout-button {
+    -fx-background-color: #e63946;
+    -fx-text-fill: white;
+    -fx-pref-width: 180;
+    -fx-background-radius: 8;
+}
+
+.logout-button:hover {
+    -fx-background-color: #c1121f;
+}
+
+/* ================= CENTER ================= */
+.center-container {
+    -fx-background-color: transparent;
 }
 
 .section-title {
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
     -fx-text-fill: #1d3557;
+}
+
+/* Room & Discount Cards */
+.card {
+    -fx-background-color: white;
+    -fx-padding: 20;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 4);
+    -fx-pref-width: 220;
+}
+
+.card-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.card-text {
+    -fx-font-size: 13px;
 }
 
 /* Container */
