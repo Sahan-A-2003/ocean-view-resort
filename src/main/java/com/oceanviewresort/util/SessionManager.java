@@ -28,4 +28,13 @@ public class SessionManager {
         this.username = null;
         this.role = null;
     }
+
+    // ---------- USERNAME ----------
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 }

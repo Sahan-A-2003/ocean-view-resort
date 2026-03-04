@@ -85,9 +85,14 @@ public class LoginController {
 
             // Set scene
             Stage stage = (Stage) loginButton.getScene().getWindow();
+
+            stage.setMaximized(false);
+            stage.setWidth(1200);
+            stage.setHeight(700);
+
             stage.setScene(new Scene(root));
             stage.setTitle(role.equals("ADMIN") ? "Admin Dashboard" : "User Dashboard");
-            stage.setMaximized(true);
+
             stage.show();
 
         } catch (IOException e) {

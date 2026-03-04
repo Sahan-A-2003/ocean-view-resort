@@ -27,9 +27,7 @@ public class DashboardController {
         String role = SessionManager.getInstance().getRole();
         userRoleLabel.setText("Role: " + role);
 
-        if (!role.equals("ADMIN")) {
-            // Hide admin button if user
-        }
+        loadAvailableRooms();
     }
 
     private void loadView(String fxml) {
@@ -78,35 +76,49 @@ public class DashboardController {
     }
 
     private void loadAvailableRooms() {
+        if (availableRoomsPane == null) return;
 
         availableRoomsPane.getChildren().clear();
 
-        String sql = "SELECT * FROM Room WHERE status = 'Available'";
+        // Group by room type to count available rooms of each type
+        String sql = "SELECT roomType, COUNT(*) AS availableCount, bedCount, pricePerNight " +
+                "FROM Room WHERE status = 'Available' " +
+                "GROUP BY roomType, bedCount, pricePerNight";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-
                 String roomType = rs.getString("roomType");
-                double price = rs.getDouble("pricePerNight");
+                int availableCount = rs.getInt("availableCount");
                 int beds = rs.getInt("bedCount");
-                int roomNumber = rs.getInt("roomNumber");
+                double price = rs.getDouble("pricePerNight");
 
-                VBox card = new VBox(8);
+                // Create card
+                VBox card = new VBox(10);
                 card.getStyleClass().add("card");
+                card.setPrefWidth(180);
+                card.setStyle("-fx-background-color: #f1faee; -fx-padding: 15; -fx-background-radius: 10;");
 
-                Label title = new Label(roomType + " (Room " + roomNumber + ")");
-                title.getStyleClass().add("card-title");
+                // Room type
+                Label typeLabel = new Label(roomType);
+                typeLabel.getStyleClass().add("card-title");
+                typeLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 16;");
 
-                Label priceLabel = new Label("Price: $" + price + " / night");
-                priceLabel.getStyleClass().add("card-text");
+                // Available count
+                Label countLabel = new Label("Available: " + availableCount);
+                countLabel.getStyleClass().add("card-text");
 
+                // Beds
                 Label bedLabel = new Label("Beds: " + beds);
                 bedLabel.getStyleClass().add("card-text");
 
-                card.getChildren().addAll(title, priceLabel, bedLabel);
+                // Price
+                Label priceLabel = new Label("Price: $" + price + " / night");
+                priceLabel.getStyleClass().add("card-text");
+
+                card.getChildren().addAll(typeLabel, countLabel, bedLabel, priceLabel);
 
                 availableRoomsPane.getChildren().add(card);
             }

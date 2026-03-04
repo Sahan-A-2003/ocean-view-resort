@@ -29,19 +29,14 @@
 .sidebar {
     -fx-background-color: #1d3557;
     -fx-pref-width: 220;
-}
-
-.menu-title {
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
+    -fx-padding: 20 10 20 10; /* Extra padding inside the sidebar */
 }
 
 .sidebar-button {
     -fx-background-color: transparent;
     -fx-text-fill: white;
-    -fx-pref-width: 180;
-    -fx-padding: 10 0 10 0;
+    -fx-pref-width: 160;
+    -fx-padding: 12 0 12 0;   /* vertical padding for bigger buttons */
     -fx-background-radius: 8;
 }
 
@@ -50,6 +45,17 @@
     -fx-cursor: hand;
 }
 
+.logout-button {
+    -fx-background-color: #e63946;
+    -fx-text-fill: white;
+    -fx-pref-width: 160;
+    -fx-padding: 12 0 12 0;
+    -fx-background-radius: 8;
+}
+
+.logout-button:hover {
+    -fx-background-color: #d62828;
+}
 .logout-button {
     -fx-background-color: #e63946;
     -fx-text-fill: white;
@@ -74,20 +80,21 @@
 
 /* Room & Discount Cards */
 .card {
-    -fx-background-color: white;
-    -fx-padding: 20;
-    -fx-background-radius: 12;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 4);
-    -fx-pref-width: 220;
+    -fx-background-color: #f1faee;
+    -fx-padding: 15;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
 }
 
 .card-title {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
+    -fx-text-fill: #1d3557;
 }
 
 .card-text {
-    -fx-font-size: 13px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #457b9d;
 }
 
 /* Container */
