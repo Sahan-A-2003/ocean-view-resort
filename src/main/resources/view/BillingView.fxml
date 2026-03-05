@@ -4,10 +4,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
 
-<?xml version="1.0" encoding="UTF-8"?>
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.oceanviewresort.controller.BillingController"
-      spacing="20" alignment="TOP_CENTER" padding="20">
+      spacing="20" alignment="TOP_CENTER">
+
+    <!-- Proper padding -->
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
 
     <Label text="Billing Section" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
