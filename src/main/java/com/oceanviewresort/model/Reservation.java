@@ -81,6 +81,10 @@ public class Reservation {
         this.guestName = guestName;
     }
 
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
+
     public void setCheckInDate(LocalDate checkInDate) {
         this.checkInDate = checkInDate;
     }
@@ -88,4 +92,6 @@ public class Reservation {
     public void setCheckOutDate(LocalDate checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
+
+
 }

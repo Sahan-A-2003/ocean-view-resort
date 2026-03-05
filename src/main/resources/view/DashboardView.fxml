@@ -41,7 +41,7 @@
             <Button text="Dashboard" styleClass="sidebar-button" onAction="#loadHome"/>
             <Button text="Reservations" styleClass="sidebar-button" onAction="#loadReservations"/>
             <Button text="Billing" styleClass="sidebar-button" onAction="#loadBilling"/>
-            <Button text="Reports" styleClass="sidebar-button" onAction="#loadReports"/>
+            <Button text="Help" styleClass="sidebar-button" onAction="#loadHelp"/>
             <Button text="Admin Panel" styleClass="sidebar-button" onAction="#loadAdminPanel"/>
 
             <Region VBox.vgrow="ALWAYS"/>

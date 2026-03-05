@@ -7,48 +7,43 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.oceanviewresort.controller.ReservationsController">
 
-    <!-- TOP RIGHT ADD BUTTON -->
+    <!-- TOP BAR WITH SEARCH LEFT & ADD BUTTON RIGHT -->
     <top>
-        <HBox alignment="CENTER_RIGHT">
+        <HBox spacing="20" alignment="CENTER_LEFT">
             <padding>
-                <Insets top="10" right="20"/>
+                <Insets top="15" right="20" bottom="15" left="20"/>
             </padding>
 
+            <!-- Search Section -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Search Reservation:"/>
+                <TextField fx:id="searchField" promptText="Search by guest or room..."/>
+                <Button text="Search" onAction="#handleSearch"/>
+            </HBox>
+
+            <Region HBox.hgrow="ALWAYS"/> <!-- Push Add button to the right -->
+
+            <!-- Add Reservation Button -->
             <Button text="Add Reservation"
-                    onAction="#handleAddReservation"/>
+                    onAction="#handleAddReservation"
+                    style="-fx-font-weight: bold;"/>
         </HBox>
     </top>
 
-    <!-- LEFT SEARCH -->
-    <left>
-        <VBox spacing="10">
-            <padding>
-                <Insets top="20" left="20"/>
-            </padding>
-
-            <Label text="Search Reservation"/>
-
-            <TextField fx:id="searchField"
-                       promptText="Search..."/>
-
-            <Button text="Search"
-                    onAction="#handleSearch"/>
-        </VBox>
-    </left>
-
     <!-- CENTER TABLE -->
     <center>
-        <TableView fx:id="reservationTable">
+        <TableView fx:id="reservationTable" prefHeight="500">
 
             <columns>
-
                 <TableColumn fx:id="colReservationID" text="Reservation ID"/>
                 <TableColumn fx:id="colGuestName" text="Guest Name"/>
-                <TableColumn fx:id="colRoomID" text="Room ID"/>
+                <TableColumn fx:id="colRoomID" text="Room Number"/>
+                <TableColumn fx:id="colRoomType" text="Room Type"/>
                 <TableColumn fx:id="colCheckIn" text="Check In"/>
                 <TableColumn fx:id="colCheckOut" text="Check Out"/>
                 <TableColumn fx:id="colStatus" text="Status"/>
-
+                <TableColumn fx:id="colEdit" text="Edit"/>
+                <TableColumn fx:id="colCancel" text="Cancel"/>
             </columns>
 
         </TableView>

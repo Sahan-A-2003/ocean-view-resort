@@ -1,12 +1,22 @@
-<VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.oceanviewresort.controller.BillingController"
-      stylesheets="@../css/style.css">
+      spacing="20" alignment="TOP_CENTER" padding="20">
 
-    <Label text="Billing Module" styleClass="section-title"/>
+    <Label text="Billing Section" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
-    <TextField fx:id="reservationIdField" promptText="Reservation ID"/>
-    <Button text="Generate Bill" onAction="#generateBill"/>
-
-    <TextArea fx:id="billArea" prefHeight="200"/>
-
+    <TableView fx:id="billingTable">
+        <columns>
+            <TableColumn text="Bill ID"/>
+            <TableColumn text="Guest Name"/>
+            <TableColumn text="Amount"/>
+            <TableColumn text="Status"/>
+        </columns>
+    </TableView>
 </VBox>

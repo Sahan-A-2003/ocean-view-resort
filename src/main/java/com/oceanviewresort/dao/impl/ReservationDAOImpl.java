@@ -87,6 +87,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 
                 r.setReservationID(rs.getInt("reservationID"));
                 r.setRoomID(rs.getInt("roomID"));
+                r.setRoomType(rs.getString("roomType"));
                 r.setGuestName(rs.getString("guestName"));
 
                 r.setCheckInDate(rs.getDate("checkInDate").toLocalDate());

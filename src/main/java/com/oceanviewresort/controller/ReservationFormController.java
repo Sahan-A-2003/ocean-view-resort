@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -151,6 +152,10 @@ public class ReservationFormController {
 
 
             messageLabel.setText("Reservation saved successfully!");
+
+            Stage stage = (Stage) guestNameField.getScene().getWindow();
+            stage.close();
+
             System.out.println("Reservation Saved Successfully!");
 
             // Optional: Clear form

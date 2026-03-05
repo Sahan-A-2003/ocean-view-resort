@@ -47,8 +47,7 @@ public class DashboardController {
         }
     }
 
-    @FXML private void loadHome() { loadView("HomeView.fxml"); }
-    @FXML private void loadBilling() { loadView("BillingView.fxml"); }
+
     @FXML private void loadReports() { loadView("ReportsView.fxml"); }
     @FXML private void loadAdminPanel() { loadView("AdminPanelView.fxml"); }
 
@@ -165,6 +164,42 @@ public class DashboardController {
             card.getChildren().addAll(codeLabel, descLabel, percentLabel, validLabel);
 
             availableDiscountPane.getChildren().add(card);
+        }
+    }
+
+    @FXML
+    private void loadBilling() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/BillingView.fxml"));
+            Parent  billingContent = loader.load();
+            mainBorderPane.setCenter(billingContent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void loadHome() {
+        try {
+            // Load your default Dashboard center content FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DashboardView.fxml"));
+            Parent  homeContent = loader.load();
+
+            mainBorderPane.setCenter(homeContent);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void loadHelp() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HelperView.fxml"));
+            Parent helpContent = loader.load();
+            mainBorderPane.setCenter(helpContent);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
