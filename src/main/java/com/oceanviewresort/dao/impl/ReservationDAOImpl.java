@@ -19,7 +19,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     @Override
     public boolean addReservation(Reservation r) {
 
-        String sql = "INSERT INTO reservations " +
+        String sql = "INSERT INTO reservation " +
                 "(userID, roomID, guestName, address, contact, roomType, " +
                 "checkInDate, checkOutDate, numberOfRooms, numberOfGuests, status) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -49,7 +49,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     @Override
     public Reservation getReservationById(int id) {
 
-        String sql = "SELECT * FROM reservations WHERE reservationID=?";
+        String sql = "SELECT * FROM reservation WHERE reservationID=?";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 
@@ -75,7 +75,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     public List<Reservation> getAllReservations() {
 
         List<Reservation> list = new ArrayList<>();
-        String sql = "SELECT * FROM reservations";
+        String sql = "SELECT * FROM reservation";
 
         try (Statement stmt = connection.createStatement()) {
 
@@ -84,6 +84,45 @@ public class ReservationDAOImpl implements ReservationDAO {
             while (rs.next()) {
 
                 Reservation r = new Reservation();
+
+                r.setReservationID(rs.getInt("reservationID"));
+                r.setRoomID(rs.getInt("roomID"));
+                r.setGuestName(rs.getString("guestName"));
+
+                r.setCheckInDate(rs.getDate("checkInDate").toLocalDate());
+                r.setCheckOutDate(rs.getDate("checkOutDate").toLocalDate());
+
+                r.setStatus(rs.getString("status"));
+
+                list.add(r);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<Reservation> searchReservations(String keyword) {
+
+        List<Reservation> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM reservation " +
+                "WHERE reservationID LIKE ? OR roomID LIKE ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + keyword + "%");
+            stmt.setString(2, "%" + keyword + "%");
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Reservation r = new Reservation();
+
                 r.setReservationID(rs.getInt("reservationID"));
                 r.setStatus(rs.getString("status"));
 
@@ -100,7 +139,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     @Override
     public boolean updateStatus(int reservationID, String status) {
 
-        String sql = "UPDATE reservations SET status=? WHERE reservationID=?";
+        String sql = "UPDATE reservation SET status=? WHERE reservationID=?";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 
@@ -118,7 +157,7 @@ public class ReservationDAOImpl implements ReservationDAO {
     @Override
     public boolean deleteReservation(int id) {
 
-        String sql = "DELETE FROM reservations WHERE reservationID=?";
+        String sql = "DELETE FROM reservation WHERE reservationID=?";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 
@@ -136,7 +175,7 @@ public class ReservationDAOImpl implements ReservationDAO {
                                 java.time.LocalDate checkOut) {
 
         String sql = "SELECT SUM(numberOfRooms) as total " +
-                "FROM reservations " +
+                "FROM reservation " +
                 "WHERE roomType=? " +
                 "AND status='Booked' " +
                 "AND checkInDate < ? " +

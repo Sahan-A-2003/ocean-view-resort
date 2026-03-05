@@ -6,9 +6,8 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    // Single instance
+    // Singleton instance
     private static DBConnection instance;
-    private static Connection connection;
 
     // Database credentials
     private final String URL = "jdbc:mysql://localhost:3306/oceanviewresort";
@@ -17,25 +16,26 @@ public class DBConnection {
 
     // Private constructor
     private DBConnection() throws SQLException {
-        try {
-            connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Database connected successfully!");
-        } catch (SQLException e) {
-            throw new SQLException("Failed to connect to database: " + e.getMessage());
-        }
+        // Nothing to do here; we won’t store a static connection
+        System.out.println("DBConnection instance created!");
     }
 
-    // Public method to get the instance
+    // Get singleton instance
     public static DBConnection getInstance() throws SQLException {
         if (instance == null) {
-            instance = new DBConnection();
-        } else if (instance.getConnection().isClosed()) {
             instance = new DBConnection();
         }
         return instance;
     }
 
-    public static Connection getConnection() {
-        return connection;
+    // Always return a fresh connection
+    public Connection getConnection() throws SQLException {
+        try {
+            Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Database connected successfully!");
+            return conn;
+        } catch (SQLException e) {
+            throw new SQLException("Failed to connect to database: " + e.getMessage());
+        }
     }
 }

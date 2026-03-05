@@ -48,7 +48,7 @@ public class LoginController {
 
             // Store session
             SessionManager.getInstance()
-                    .setUser(user.getUsername(), user.getRole());
+                    .setUser(user.getUserID(), user.getUsername(), user.getRole());
 
             // Redirect based on role
             if (user.getRole().equalsIgnoreCase("ADMIN")) {

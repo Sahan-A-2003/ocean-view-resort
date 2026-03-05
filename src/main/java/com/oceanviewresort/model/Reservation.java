@@ -66,5 +66,26 @@ public class Reservation {
     public int getNumberOfGuests() { return numberOfGuests; }
 
     public String getStatus() { return status; }
+
+
     public void setStatus(String status) { this.status = status; }
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
+    }
+
+    public void setGuestName(String guestName) {
+        this.guestName = guestName;
+    }
+
+    public void setCheckInDate(LocalDate checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public void setCheckOutDate(LocalDate checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
 }

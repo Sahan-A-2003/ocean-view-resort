@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.oceanviewresort.controller.ReservationsController">
+
+    <!-- TOP RIGHT ADD BUTTON -->
+    <top>
+        <HBox alignment="CENTER_RIGHT">
+            <padding>
+                <Insets top="10" right="20"/>
+            </padding>
+
+            <Button text="Add Reservation"
+                    onAction="#handleAddReservation"/>
+        </HBox>
+    </top>
+
+    <!-- LEFT SEARCH -->
+    <left>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20" left="20"/>
+            </padding>
+
+            <Label text="Search Reservation"/>
+
+            <TextField fx:id="searchField"
+                       promptText="Search..."/>
+
+            <Button text="Search"
+                    onAction="#handleSearch"/>
+        </VBox>
+    </left>
+
+    <!-- CENTER TABLE -->
+    <center>
+        <TableView fx:id="reservationTable">
+
+            <columns>
+
+                <TableColumn fx:id="colReservationID" text="Reservation ID"/>
+                <TableColumn fx:id="colGuestName" text="Guest Name"/>
+                <TableColumn fx:id="colRoomID" text="Room ID"/>
+                <TableColumn fx:id="colCheckIn" text="Check In"/>
+                <TableColumn fx:id="colCheckOut" text="Check Out"/>
+                <TableColumn fx:id="colStatus" text="Status"/>
+
+            </columns>
+
+        </TableView>
+    </center>
+
+</BorderPane>

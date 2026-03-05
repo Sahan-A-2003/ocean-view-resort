@@ -5,6 +5,7 @@
 <?import javafx.geometry.Insets?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:id="mainBorderPane"
             fx:controller="com.oceanviewresort.controller.DashboardController"
             stylesheets="@../css/style.css">
 

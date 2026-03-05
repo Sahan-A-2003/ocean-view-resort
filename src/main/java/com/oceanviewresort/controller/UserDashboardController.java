@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -24,6 +25,8 @@ public class UserDashboardController {
     @FXML private Label userRoleLabel;
     @FXML private StackPane contentArea;
     @FXML private FlowPane availableRoomsPane;
+    @FXML private FlowPane availableDiscountPane;
+    @FXML private BorderPane mainBorderPane;
 
     @FXML
     public void initialize() {
@@ -50,10 +53,6 @@ public class UserDashboardController {
     @FXML private void loadHome() {
         loadAvailableRooms();       // load available rooms
         loadAvailableDiscounts();   // load discounts under rooms
-    }
-
-    @FXML private void loadReservations() {
-        loadView("ReservationTableView.fxml");
     }
 
     @FXML private void loadBilling() {
@@ -97,7 +96,7 @@ public class UserDashboardController {
         availableRoomsPane.getChildren().clear();
 
         String sql = "SELECT * FROM Room WHERE status = 'Available'";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DBConnection.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -133,7 +132,7 @@ public class UserDashboardController {
         if (availableRoomsPane == null) return;
 
         String sql = "SELECT * FROM Billing WHERE discountAmount > 0";
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DBConnection.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -143,6 +142,23 @@ public class UserDashboardController {
                 discountLabel.getStyleClass().add("card-text");
                 availableRoomsPane.getChildren().add(discountLabel);
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void loadReservations() {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/view/ReservationsView.fxml"));
+
+            Parent view = loader.load();
+
+            mainBorderPane.setCenter(view);
 
         } catch (Exception e) {
             e.printStackTrace();

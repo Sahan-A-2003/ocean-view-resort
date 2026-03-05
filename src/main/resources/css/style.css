@@ -142,3 +142,14 @@
     -fx-font-size: 12px;
     -fx-text-fill: red;
 }
+
+/*Reservation form*/
+.text-field, .combo-box, .date-picker, .spinner{
+    -fx-pref-width: 250;
+}
+
+.button{
+    -fx-background-color: #2c7be5;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+}

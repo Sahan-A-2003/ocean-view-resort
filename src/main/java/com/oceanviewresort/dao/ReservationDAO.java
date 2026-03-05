@@ -14,4 +14,7 @@ public interface ReservationDAO {
     boolean updateStatus(int reservationID, String status);
 
     boolean deleteReservation(int id);
+
+    List<Reservation> searchReservations(String keyword);
+
 }

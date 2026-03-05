@@ -1,11 +1,15 @@
 package com.oceanviewresort.controller;
 
 import com.oceanviewresort.config.DBConnection;
+import com.oceanviewresort.dao.DiscountDAO;
+import com.oceanviewresort.dao.impl.DiscountDAOImpl;
+import com.oceanviewresort.model.Discount;
 import com.oceanviewresort.util.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -13,13 +17,15 @@ import javafx.scene.layout.VBox;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 public class DashboardController {
 
     @FXML private Label userRoleLabel;
     @FXML private StackPane contentArea;
-    @FXML
-    private FlowPane availableRoomsPane;
+    @FXML private FlowPane availableRoomsPane;
+    @FXML private FlowPane availableDiscountPane;
+    @FXML private BorderPane mainBorderPane;
 
     @FXML
     public void initialize() {
@@ -28,6 +34,8 @@ public class DashboardController {
         userRoleLabel.setText("Role: " + role);
 
         loadAvailableRooms();
+
+        loadAvailableDiscounts();
     }
 
     private void loadView(String fxml) {
@@ -40,7 +48,6 @@ public class DashboardController {
     }
 
     @FXML private void loadHome() { loadView("HomeView.fxml"); }
-    @FXML private void loadReservations() { loadView("ReservationTableView.fxml"); }
     @FXML private void loadBilling() { loadView("BillingView.fxml"); }
     @FXML private void loadReports() { loadView("ReportsView.fxml"); }
     @FXML private void loadAdminPanel() { loadView("AdminPanelView.fxml"); }
@@ -85,7 +92,7 @@ public class DashboardController {
                 "FROM Room WHERE status = 'Available' " +
                 "GROUP BY roomType, bedCount, pricePerNight";
 
-        try (Connection conn = DBConnection.getConnection();
+        try (Connection conn = DBConnection.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -122,6 +129,56 @@ public class DashboardController {
 
                 availableRoomsPane.getChildren().add(card);
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadAvailableDiscounts() {
+        if (availableDiscountPane == null) return;
+
+        availableDiscountPane.getChildren().clear();
+
+        DiscountDAO discountDAO = new DiscountDAOImpl();
+        List<Discount> discounts = discountDAO.getActiveDiscounts();
+
+        for (Discount discount : discounts) {
+            VBox card = new VBox(8);
+            card.getStyleClass().add("card");
+            card.setPrefWidth(180);
+            card.setStyle("-fx-background-color: #fefae0; -fx-padding: 15; -fx-background-radius: 10;");
+
+            Label codeLabel = new Label(discount.getCode());
+            codeLabel.getStyleClass().add("card-title");
+            codeLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 16;");
+
+            Label descLabel = new Label(discount.getDescription());
+            descLabel.getStyleClass().add("card-text");
+
+            Label percentLabel = new Label("Discount: " + discount.getPercentage() + "%");
+            percentLabel.getStyleClass().add("card-text");
+
+            Label validLabel = new Label("Valid: " + discount.getValidFrom() + " to " + discount.getValidTo());
+            validLabel.getStyleClass().add("card-text");
+
+            card.getChildren().addAll(codeLabel, descLabel, percentLabel, validLabel);
+
+            availableDiscountPane.getChildren().add(card);
+        }
+    }
+
+    @FXML
+    private void loadReservations() {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/view/ReservationsView.fxml"));
+
+            Parent view = loader.load();
+
+            mainBorderPane.setCenter(view);
 
         } catch (Exception e) {
             e.printStackTrace();
