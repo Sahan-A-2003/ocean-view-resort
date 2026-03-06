@@ -1,5 +1,6 @@
 package com.oceanviewresort.controller;
 
+import com.oceanviewresort.dao.RoomDAO;
 import com.oceanviewresort.model.Room;
 import com.oceanviewresort.model.User;
 import javafx.fxml.FXML;
@@ -33,10 +34,19 @@ public class AdminPanelController {
     @FXML
     private UserDAO userDAO;
 
+    private RoomDAOImpl roomDAO;
+
+
     @FXML
     public void initialize() throws SQLException {
 
         userDAO = new UserDAOImpl();
+
+        try {
+            roomDAO = new RoomDAOImpl(); // instantiate DAO
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         loadUsers();
     }
@@ -157,6 +167,28 @@ public class AdminPanelController {
         contentContainer.getChildren().addAll(topBar, userPane);
     }
 
+    @FXML
+    private void openAddRoomPopup() {
+
+        try {
+            // Load the AddRoom FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddRoomView.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage for the popup
+            Stage stage = new Stage();
+            stage.setTitle("Add Room");
+
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            showRoomManagement();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // ROOM MANAGEMENT VIEW
     @FXML
     private void showRoomManagement() {
@@ -193,5 +225,22 @@ public class AdminPanelController {
 
         // Show Add Room button at the top
         contentContainer.getChildren().addAll(addRoomBtn, roomPane);
+    }
+
+    private void deleteRoom(int roomID) {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Room");
+        alert.setHeaderText("Are you sure?");
+        alert.setContentText("This action cannot be undone.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+
+            roomDAO.deleteRoom(roomID);
+
+            showRoomManagement(); // Reload the room management view
+        }
     }
 }
