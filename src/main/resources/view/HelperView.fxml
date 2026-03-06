@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.oceanviewresort.controller.HelperController"
+            fitToWidth="true"
+            styleClass="center-scroll">
+
+    <VBox spacing="20" styleClass="center-container">
+        <padding>
+            <Insets top="30" right="40" bottom="30" left="40"/>
+        </padding>
+
+        <!-- Header -->
+        <Label text="Help &amp; FAQs" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+
+        <Label text="Find answers to common questions below." style="-fx-font-size: 14px; -fx-text-fill: #555555;"/>
+
+        <!-- FAQ Section -->
+        <VBox spacing="15">
+
+            <!-- Question 1 -->
+            <TitledPane text="How do I add a new reservation?" expanded="false">
+                <Label text="To add a reservation, click the 'Add Reservation' button in the Reservations section, fill out the form, and click Save." wrapText="true"/>
+            </TitledPane>
+
+            <!-- Question 2 -->
+            <TitledPane text="How do I edit a reservation?" expanded="false">
+                <Label text="Click the 'Edit' button next to the reservation you want to update, make your changes, and click Save." wrapText="true"/>
+            </TitledPane>
+
+            <!-- Question 3 -->
+            <TitledPane text="How do I cancel a reservation?" expanded="false">
+                <Label text="Click the 'Cancel' button next to the reservation. Confirm the cancellation in the popup dialog." wrapText="true"/>
+            </TitledPane>
+
+            <!-- Question 4 -->
+            <TitledPane text="How do I apply a discount?" expanded="false">
+                <Label text="When creating a reservation, select an available discount from the Discount section." wrapText="true"/>
+            </TitledPane>
+
+            <!-- Question 5 -->
+            <TitledPane text="How do I check billing?" expanded="false">
+                <Label text="Click the 'Billing' button in the sidebar to view all bills and payment details." wrapText="true"/>
+            </TitledPane>
+
+            <!-- Question 6 -->
+            <TitledPane text="How do I navigate back to the dashboard?" expanded="false">
+                <Label text="Click the 'Dashboard' button in the sidebar to return to the main overview." wrapText="true"/>
+            </TitledPane>
+
+        </VBox>
+
+    </VBox>
+
+</ScrollPane>

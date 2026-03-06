@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.oceanviewresort.controller.AddUserController"
+           style="-fx-background-color:#f4f6f9;">
+
+    <VBox spacing="18"
+          alignment="CENTER"
+          maxWidth="350"
+          style="-fx-background-color:white;
+                 -fx-background-radius:10;
+                 -fx-border-radius:10;
+                 -fx-border-color:#dddddd;">
+
+        <padding>
+            <Insets top="25" right="30" bottom="25" left="30"/>
+        </padding>
+
+        <!-- TITLE -->
+        <Label text="Add New User"
+               style="-fx-font-size:20px;
+                      -fx-font-weight:bold;
+                      -fx-text-fill:#2c3e50;"/>
+
+        <!-- FORM FIELDS -->
+        <TextField fx:id="fullNameField"
+                   promptText="Full Name"
+                   prefHeight="35"/>
+
+        <TextField fx:id="usernameField"
+                   promptText="Username"
+                   prefHeight="35"/>
+
+        <PasswordField fx:id="passwordField"
+                       promptText="Password"
+                       prefHeight="35"/>
+
+        <TextField fx:id="emailField"
+                   promptText="Email Address"
+                   prefHeight="35"/>
+
+        <TextField fx:id="contactField"
+                   promptText="Contact Number"
+                   prefHeight="35"/>
+
+        <ComboBox fx:id="roleBox"
+                  promptText="Select Role"
+                  prefHeight="35"
+                  prefWidth="250"/>
+
+        <!-- BUTTON -->
+        <Button text="Save User"
+                prefWidth="200"
+                prefHeight="40"
+                onAction="#saveUser"
+                style="-fx-background-color:#2c7be5;
+                       -fx-text-fill:white;
+                       -fx-font-weight:bold;
+                       -fx-background-radius:6;"/>
+
+    </VBox>
+
+</StackPane>

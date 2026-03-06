@@ -1,0 +1,12 @@
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.oceanviewresort.controller.ReportsController"
+      stylesheets="@../css/style.css">
+
+    <Label text="Reports" styleClass="section-title"/>
+
+    <Button text="Total Reservations" onAction="#showTotalReservations"/>
+    <Button text="Total Revenue" onAction="#showRevenue"/>
+
+    <Label fx:id="reportLabel"/>
+
+</VBox>

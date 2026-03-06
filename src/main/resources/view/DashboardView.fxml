@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:id="mainBorderPane"
+            fx:controller="com.oceanviewresort.controller.DashboardController"
+            stylesheets="@../css/style.css">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox styleClass="top-bar" alignment="CENTER_LEFT" spacing="20">
+            <padding>
+                <Insets top="15" right="25" bottom="15" left="25"/>
+            </padding>
+
+            <Label text="🌊 Ocean View Resort"
+                   styleClass="title-label"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Label text="Logged in as:"
+                   styleClass="top-small-label"/>
+
+            <Label fx:id="userRoleLabel"
+                   styleClass="role-label"/>
+        </HBox>
+    </top>
+
+    <!-- LEFT SIDEBAR -->
+    <left>
+        <VBox styleClass="sidebar" spacing="15" alignment="TOP_CENTER">
+            <padding>
+                <Insets top="30" right="20" bottom="30" left="20"/>
+            </padding>
+
+            <Label text="MENU" styleClass="menu-title"/>
+
+            <Button text="Dashboard" styleClass="sidebar-button" onAction="#loadHome"/>
+            <Button text="Reservations" styleClass="sidebar-button" onAction="#loadReservations"/>
+            <Button text="Billing" styleClass="sidebar-button" onAction="#loadBilling"/>
+            <Button text="Help" styleClass="sidebar-button" onAction="#loadHelp"/>
+            <Button text="Admin Panel" styleClass="sidebar-button" onAction="#loadAdminPanel"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Logout" styleClass="logout-button" onAction="#logout"/>
+        </VBox>
+    </left>
+
+    <!-- CENTER CONTENT -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="center-scroll">
+            <VBox spacing="30" styleClass="center-container">
+                <padding>
+                    <Insets top="30" right="40" bottom="30" left="40"/>
+                </padding>
+
+                <!-- Available Rooms Section -->
+                <VBox spacing="15">
+                    <Label text="Available Rooms"
+                           styleClass="section-title"/>
+
+                    <FlowPane fx:id="availableRoomsPane"
+                              hgap="20"
+                              vgap="20"/>
+                </VBox>
+
+                <!-- Available Discounts Section -->
+                <VBox spacing="15">
+                    <Label text="Available Discounts"
+                           styleClass="section-title"/>
+
+                    <FlowPane fx:id="availableDiscountPane"
+                              hgap="20"
+                              vgap="20"/>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

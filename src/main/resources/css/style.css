@@ -1,0 +1,189 @@
+.root {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #f4f6f9;
+}
+
+/* ================= TOP BAR ================= */
+.top-bar {
+    -fx-background-color: linear-gradient(to right, #0d3b66, #1d3557);
+}
+
+.title-label {
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.top-small-label {
+    -fx-text-fill: #dce3ea;
+    -fx-font-size: 13px;
+}
+
+.role-label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+    -fx-background-color: #1d3557;
+    -fx-pref-width: 220;
+    -fx-padding: 20 10 20 10; /* Extra padding inside the sidebar */
+}
+
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-pref-width: 160;
+    -fx-padding: 12 0 12 0;   /* vertical padding for bigger buttons */
+    -fx-background-radius: 8;
+}
+
+.sidebar-button:hover {
+    -fx-background-color: #457b9d;
+    -fx-cursor: hand;
+}
+
+.logout-button {
+    -fx-background-color: #e63946;
+    -fx-text-fill: white;
+    -fx-pref-width: 160;
+    -fx-padding: 12 0 12 0;
+    -fx-background-radius: 8;
+}
+
+.logout-button:hover {
+    -fx-background-color: #d62828;
+}
+.logout-button {
+    -fx-background-color: #e63946;
+    -fx-text-fill: white;
+    -fx-pref-width: 180;
+    -fx-background-radius: 8;
+}
+
+.logout-button:hover {
+    -fx-background-color: #c1121f;
+}
+
+/* ================= CENTER ================= */
+.center-container {
+    -fx-background-color: transparent;
+}
+
+.section-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1d3557;
+}
+
+/* Room & Discount Cards */
+.card {
+    -fx-background-color: #f1faee;
+    -fx-padding: 15;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+.card-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1d3557;
+}
+
+.card-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #457b9d;
+}
+
+/* Container */
+.login-container {
+    -fx-background-color: #f0f8ff; /* light blue background */
+    -fx-padding: 40;
+    -fx-alignment: center;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 5);
+}
+
+/* Title */
+.login-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e3d59;
+}
+
+/* Input Fields */
+.input-field {
+    -fx-pref-width: 250px;
+    -fx-font-size: 14px;
+    -fx-padding: 8 10 8 10;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-border-color: #1e3d59;
+}
+
+/* Login Button */
+.login-button {
+    -fx-background-color: #1e3d59;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 8 20 8 20;
+    -fx-background-radius: 10;
+}
+
+.login-button:hover {
+    -fx-background-color: #3e5c7e;
+}
+
+/* Error / Message Label */
+.message-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: red;
+}
+
+/*Reservation form*/
+.text-field, .combo-box, .date-picker, .spinner{
+    -fx-pref-width: 250;
+}
+
+.button{
+    -fx-background-color: #2c7be5;
+    -fx-text-fill: white;
+    -fx-background-radius: 5;
+}
+/* ================= Admin view ================= */
+.admin-card{
+    -fx-background-color:white;
+    -fx-padding:25;
+    -fx-background-radius:12;
+    -fx-border-radius:12;
+    -fx-border-color:#e0e0e0;
+    -fx-pref-width:200;
+    -fx-cursor:hand;
+}
+
+.admin-card:hover{
+    -fx-background-color:#f5f7ff;
+}
+
+.admin-title{
+    -fx-font-size:16px;
+    -fx-font-weight:bold;
+}
+
+.data-card{
+    -fx-background-color:white;
+    -fx-padding:20;
+    -fx-background-radius:10;
+    -fx-border-radius:10;
+    -fx-border-color:#e0e0e0;
+    -fx-pref-width:160;
+}
+
+.add-btn{
+    -fx-background-color:#4CAF50;
+    -fx-text-fill:white;
+    -fx-font-weight:bold;
+}

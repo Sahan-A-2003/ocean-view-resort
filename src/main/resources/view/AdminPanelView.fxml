@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.oceanviewresort.controller.AdminPanelController"
+            stylesheets="@../css/style.css">
+
+    <!-- TOP MANAGEMENT CARDS -->
+    <top>
+        <HBox spacing="30" alignment="CENTER" styleClass="admin-top">
+            <padding>
+                <Insets top="30" right="30" bottom="20" left="30"/>
+            </padding>
+
+            <!-- USER MANAGEMENT CARD -->
+            <VBox spacing="10"
+                  alignment="CENTER"
+                  styleClass="admin-card"
+                  onMouseClicked="#showUserManagement">
+
+                <Label text="👤"/>
+                <Label text="User Management"
+                       styleClass="admin-title"/>
+            </VBox>
+
+            <!-- ROOM MANAGEMENT CARD -->
+            <VBox spacing="10"
+                  alignment="CENTER"
+                  styleClass="admin-card"
+                  onMouseClicked="#showRoomManagement">
+
+                <Label text="🏨"/>
+                <Label text="Room Management"
+                       styleClass="admin-title"/>
+            </VBox>
+
+        </HBox>
+    </top>
+
+    <!-- DYNAMIC CONTENT AREA -->
+    <center>
+        <ScrollPane fitToWidth="true">
+            <VBox fx:id="contentContainer"
+                  spacing="20"
+                  alignment="TOP_CENTER">
+                <padding>
+                    <Insets top="20" right="40" bottom="20" left="40"/>
+                </padding>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
