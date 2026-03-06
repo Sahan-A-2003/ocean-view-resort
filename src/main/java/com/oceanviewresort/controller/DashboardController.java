@@ -47,10 +47,6 @@ public class DashboardController {
         }
     }
 
-
-    @FXML private void loadReports() { loadView("ReportsView.fxml"); }
-    @FXML private void loadAdminPanel() { loadView("AdminPanelView.fxml"); }
-
     @FXML
     private void logout(javafx.event.ActionEvent event) {
         try {
@@ -198,6 +194,21 @@ public class DashboardController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/HelperView.fxml"));
             Parent helpContent = loader.load();
             mainBorderPane.setCenter(helpContent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void loadAdminPanel() {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AdminPanelView.fxml"));
+            Parent view = loader.load();
+
+            mainBorderPane.setCenter(view);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
