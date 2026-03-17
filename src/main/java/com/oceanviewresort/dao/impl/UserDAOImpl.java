@@ -34,6 +34,7 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+
     @Override
     public User getUserById(int id) {
         String sql = "SELECT * FROM users WHERE userID = ?";

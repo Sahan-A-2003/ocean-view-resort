@@ -67,9 +67,7 @@ public class LoginController {
         }
     }
 
-    /**
-     * Generic method to open dashboard FXML and pass username/role
-     */
+
     private void openDashboard(String fxmlPath, String username, String role) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));

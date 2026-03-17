@@ -109,29 +109,41 @@ public class ReservationsController {
     }
 
     private void addEditButton() {
-
         colEdit.setCellFactory(param -> new TableCell<>() {
 
             private final Button btn = new Button("Edit");
 
             {
                 btn.setOnAction(event -> {
+                    try {
+                        Reservation reservation =
+                                getTableView().getItems().get(getIndex());
 
-                    Reservation reservation =
-                            getTableView().getItems().get(getIndex());
+                        FXMLLoader loader = new FXMLLoader(
+                                getClass().getResource("/view/EditReservationView.fxml")
+                        );
+                        Parent root = loader.load();
 
-                    System.out.println("Edit reservation: " +
-                            reservation.getReservationID());
+                        EditReservationController controller = loader.getController();
+                        controller.setReservation(reservation);
 
-                    // You can open reservation form here
+                        Stage stage = new Stage();
+                        stage.setTitle("Edit Reservation");
+                        stage.setScene(new Scene(root));
+                        stage.showAndWait();
+
+                        // Reload table after editing
+                        loadReservations();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 });
             }
 
             @Override
             protected void updateItem(Void item, boolean empty) {
-
                 super.updateItem(item, empty);
-
                 if (empty) {
                     setGraphic(null);
                 } else {

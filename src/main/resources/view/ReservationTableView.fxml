@@ -1,10 +1,11 @@
+
 <VBox spacing="10" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.oceanviewresort.controller.ReservationTableController"
-      stylesheets="@../css/style.css">
+      stylesheets="@/css/style.css">
 
     <Label text="All Reservations" styleClass="section-title"/>
 
-    <TableView fx:id="reservationTable">
+    <TableView fx:id="reservationTable" styleClass="reservation-table">
 
         <columns>
             <TableColumn text="ID" fx:id="colID"/>

@@ -10,15 +10,12 @@
       stylesheets="@../css/style.css"
       styleClass="login-container">
 
-    <!-- Padding correctly defined -->
     <padding>
         <Insets top="30" right="30" bottom="30" left="30"/>
     </padding>
 
-    <!-- Title -->
     <Label text="🌊 Ocean View Resort" styleClass="login-title"/>
 
-    <!-- Form Fields -->
     <VBox spacing="10" alignment="CENTER_LEFT" styleClass="form-container">
 
         <TextField fx:id="usernameField" promptText="Username" styleClass="input-field"/>
@@ -26,10 +23,8 @@
 
     </VBox>
 
-    <!-- Login Button -->
     <Button text="Login" fx:id="loginButton" onAction="#handleLogin" styleClass="login-button"/>
 
-    <!-- Message Label -->
     <Label fx:id="messageLabel" textFill="red" styleClass="message-label"/>
 
 </VBox>

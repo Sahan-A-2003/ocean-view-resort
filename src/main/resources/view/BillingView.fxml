@@ -1,26 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.oceanviewresort.controller.BillingController"
-      spacing="20" alignment="TOP_CENTER">
+      spacing="15"
+      alignment="TOP_CENTER">
 
-    <!-- Proper padding -->
+    <!-- Top padding -->
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Billing Section" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <!-- TITLE -->
+    <Label text="Billing Section"
+           style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
 
-    <TableView fx:id="billingTable">
+    <!-- SEARCH BAR -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField"
+                   promptText="Search by Room Number"
+                   prefWidth="300"
+                   onKeyReleased="#searchReservation"/>
+        <Button text="Search" onAction="#searchReservation"/>
+    </HBox>
+
+    <!-- RESERVATION CARDS CONTAINER -->
+    <ScrollPane fx:id="reservationScroll" fitToWidth="true" prefHeight="250">
+        <VBox fx:id="reservationContainer" spacing="15">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+        </VBox>
+    </ScrollPane>
+
+    <!-- BILLING TABLE -->
+    <Label text="All Billing Records"
+           style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <TableView fx:id="billingTable" prefHeight="250">
+
         <columns>
-            <TableColumn text="Bill ID"/>
-            <TableColumn text="Guest Name"/>
-            <TableColumn text="Amount"/>
-            <TableColumn text="Status"/>
+
+            <TableColumn fx:id="billIdCol" text="Bill ID"/>
+
+            <TableColumn fx:id="guestNameCol" text="Guest Name"/>
+
+            <TableColumn fx:id="roomNumberCol" text="Room Number"/>
+
+            <TableColumn fx:id="checkInCol" text="Check-In"/>
+
+            <TableColumn fx:id="checkOutCol" text="Check-Out"/>
+
+            <TableColumn fx:id="pricePerNightCol" text="Price/Night"/>
+
+            <TableColumn fx:id="totalAmountCol" text="Total Amount"/>
+
+            <TableColumn fx:id="statusCol" text="Status"/>
+
+            <TableColumn fx:id="printCol" text="Print Bill"/>
+
         </columns>
+
     </TableView>
+
 </VBox>
