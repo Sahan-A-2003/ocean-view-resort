@@ -200,4 +200,64 @@ public class ReservationDAOImpl implements ReservationDAO {
 
         return 0;
     }
+
+    public boolean updateReservation(Reservation r) {
+        String sql = "UPDATE reservation SET guestName=?, roomID=?, roomType=?, checkInDate=?, checkOutDate=?, numberOfRooms=?, numberOfGuests=? WHERE reservationID=?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, r.getGuestName());
+            ps.setInt(2, r.getRoomID());
+            ps.setString(3, r.getRoomType());
+            ps.setDate(4, java.sql.Date.valueOf(r.getCheckInDate()));
+            ps.setDate(5, java.sql.Date.valueOf(r.getCheckOutDate()));
+            ps.setInt(6, r.getNumberOfRooms());
+            ps.setInt(7, r.getNumberOfGuests());
+            ps.setInt(8, r.getReservationID());
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public List<Reservation> getReservationsByRoomNumber(int roomNumber) {
+
+        List<Reservation> reservations = new ArrayList<>();
+
+        String sql = "SELECT * FROM reservation WHERE roomID = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setInt(1, roomNumber);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Reservation reservation = new Reservation();
+
+                reservation.setReservationID(rs.getInt("reservationID"));
+                reservation.setRoomID(rs.getInt("roomID"));
+                reservation.setGuestName(rs.getString("guestName"));
+
+                reservation.setCheckInDate(
+                        rs.getDate("checkInDate").toLocalDate()
+                );
+
+                reservation.setCheckOutDate(
+                        rs.getDate("checkOutDate").toLocalDate()
+                );
+
+                reservation.setStatus(rs.getString("status"));
+
+                reservations.add(reservation);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reservations;
+    }
 }

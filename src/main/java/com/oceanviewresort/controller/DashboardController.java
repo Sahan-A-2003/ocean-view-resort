@@ -97,30 +97,78 @@ public class DashboardController {
                 int beds = rs.getInt("bedCount");
                 double price = rs.getDouble("pricePerNight");
 
-                // Create card
-                VBox card = new VBox(10);
-                card.getStyleClass().add("card");
-                card.setPrefWidth(180);
-                card.setStyle("-fx-background-color: #f1faee; -fx-padding: 15; -fx-background-radius: 10;");
+                VBox card = new VBox(12);
+                card.setPrefWidth(220);
+                card.setPrefHeight(150);
 
-                // Room type
+                // Base clean style
+                card.setStyle(
+                        "-fx-background-color: white;" +
+                                "-fx-padding: 18;" +
+                                "-fx-background-radius: 14;" +
+                                "-fx-border-radius: 14;" +
+                                "-fx-border-color: #e6e6e6;" +
+                                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10,0,0,4);"
+                );
+
+                // 🔹 Room Type (Title)
                 Label typeLabel = new Label(roomType);
-                typeLabel.getStyleClass().add("card-title");
-                typeLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 16;");
+                typeLabel.setStyle(
+                        "-fx-font-size: 17px;" +
+                                "-fx-font-weight: bold;" +
+                                "-fx-text-fill: #2c3e50;"
+                );
 
-                // Available count
+                // 🔹 Availability (important → colored)
                 Label countLabel = new Label("Available: " + availableCount);
-                countLabel.getStyleClass().add("card-text");
+                countLabel.setStyle(
+                        "-fx-font-size: 13px;" +
+                                "-fx-text-fill: #27ae60;"   // green = available
+                );
 
-                // Beds
+                // 🔹 Beds
                 Label bedLabel = new Label("Beds: " + beds);
-                bedLabel.getStyleClass().add("card-text");
+                bedLabel.setStyle(
+                        "-fx-font-size: 13px;" +
+                                "-fx-text-fill: #7f8c8d;"
+                );
 
-                // Price
-                Label priceLabel = new Label("Price: $" + price + " / night");
-                priceLabel.getStyleClass().add("card-text");
+                // 🔹 Price (highlighted)
+                Label priceLabel = new Label("$" + price + " / night");
+                priceLabel.setStyle(
+                        "-fx-font-size: 15px;" +
+                                "-fx-font-weight: bold;" +
+                                "-fx-text-fill: #2980b9;"
+                );
 
                 card.getChildren().addAll(typeLabel, countLabel, bedLabel, priceLabel);
+
+                // 🔥 HOVER EFFECT (premium feel)
+                card.setOnMouseEntered(e -> {
+                    card.setStyle(
+                            "-fx-background-color: #f9fbfd;" +
+                                    "-fx-padding: 18;" +
+                                    "-fx-background-radius: 14;" +
+                                    "-fx-border-radius: 14;" +
+                                    "-fx-border-color: #3498db;" +
+                                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 20,0,0,6);" +
+                                    "-fx-scale-x: 1.04;" +
+                                    "-fx-scale-y: 1.04;"
+                    );
+                });
+
+                card.setOnMouseExited(e -> {
+                    card.setStyle(
+                            "-fx-background-color: white;" +
+                                    "-fx-padding: 18;" +
+                                    "-fx-background-radius: 14;" +
+                                    "-fx-border-radius: 14;" +
+                                    "-fx-border-color: #e6e6e6;" +
+                                    "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10,0,0,4);" +
+                                    "-fx-scale-x: 1;" +
+                                    "-fx-scale-y: 1;"
+                    );
+                });
 
                 availableRoomsPane.getChildren().add(card);
             }
@@ -139,25 +187,82 @@ public class DashboardController {
         List<Discount> discounts = discountDAO.getActiveDiscounts();
 
         for (Discount discount : discounts) {
-            VBox card = new VBox(8);
-            card.getStyleClass().add("card");
-            card.setPrefWidth(180);
-            card.setStyle("-fx-background-color: #fefae0; -fx-padding: 15; -fx-background-radius: 10;");
 
+            VBox card = new VBox(10);
+            card.setPrefWidth(200);
+            card.setPrefHeight(140);
+
+            // Base style (clean + modern)
+            card.setStyle(
+                    "-fx-background-color: white;" +
+                            "-fx-padding: 15;" +
+                            "-fx-background-radius: 12;" +
+                            "-fx-border-radius: 12;" +
+                            "-fx-border-color: #e0e0e0;" +
+                            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10,0,0,4);"
+            );
+
+            // Title (Discount Code)
             Label codeLabel = new Label(discount.getCode());
-            codeLabel.getStyleClass().add("card-title");
-            codeLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 16;");
+            codeLabel.setStyle(
+                    "-fx-font-size: 16px;" +
+                            "-fx-font-weight: bold;" +
+                            "-fx-text-fill: #2c3e50;"
+            );
 
+            // Description
             Label descLabel = new Label(discount.getDescription());
-            descLabel.getStyleClass().add("card-text");
+            descLabel.setStyle(
+                    "-fx-font-size: 12px;" +
+                            "-fx-text-fill: #7f8c8d;"
+            );
+            descLabel.setWrapText(true);
 
-            Label percentLabel = new Label("Discount: " + discount.getPercentage() + "%");
-            percentLabel.getStyleClass().add("card-text");
+            // Percentage (highlighted)
+            Label percentLabel = new Label(discount.getPercentage() + "% OFF");
+            percentLabel.setStyle(
+                    "-fx-font-size: 14px;" +
+                            "-fx-font-weight: bold;" +
+                            "-fx-text-fill: #27ae60;"
+            );
 
-            Label validLabel = new Label("Valid: " + discount.getValidFrom() + " to " + discount.getValidTo());
-            validLabel.getStyleClass().add("card-text");
+            // Valid dates
+            Label validLabel = new Label(
+                    discount.getValidFrom() + " → " + discount.getValidTo()
+            );
+            validLabel.setStyle(
+                    "-fx-font-size: 11px;" +
+                            "-fx-text-fill: #95a5a6;"
+            );
 
             card.getChildren().addAll(codeLabel, descLabel, percentLabel, validLabel);
+
+            // HOVER EFFECT
+            card.setOnMouseEntered(e -> {
+                card.setStyle(
+                        "-fx-background-color: #f9fbfd;" +
+                                "-fx-padding: 15;" +
+                                "-fx-background-radius: 12;" +
+                                "-fx-border-radius: 12;" +
+                                "-fx-border-color: #3498db;" +
+                                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 20,0,0,6);" +
+                                "-fx-scale-x: 1.03;" +
+                                "-fx-scale-y: 1.03;"
+                );
+            });
+
+            card.setOnMouseExited(e -> {
+                card.setStyle(
+                        "-fx-background-color: white;" +
+                                "-fx-padding: 15;" +
+                                "-fx-background-radius: 12;" +
+                                "-fx-border-radius: 12;" +
+                                "-fx-border-color: #e0e0e0;" +
+                                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10,0,0,4);" +
+                                "-fx-scale-x: 1;" +
+                                "-fx-scale-y: 1;"
+                );
+            });
 
             availableDiscountPane.getChildren().add(card);
         }

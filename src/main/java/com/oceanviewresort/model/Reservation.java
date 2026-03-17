@@ -93,5 +93,8 @@ public class Reservation {
         this.checkOutDate = checkOutDate;
     }
 
+    public void setNumberOfRooms(int numberOfRooms) { this.numberOfRooms = numberOfRooms; }
 
+
+    public void setNumberOfGuests(int numberOfGuests) {this.numberOfGuests = numberOfGuests;}
 }

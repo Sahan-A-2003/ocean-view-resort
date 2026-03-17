@@ -17,7 +17,6 @@ public class SessionManager {
         return instance;
     }
 
-    // Set all user info at once (after login)
     public void setUser(int userId, String username, String role) {
         this.userId = userId;
         this.username = username;
