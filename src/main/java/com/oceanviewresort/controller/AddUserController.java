@@ -54,7 +54,7 @@ public class AddUserController {
 
         boolean hasError = false; // flag to check if any field is empty
 
-        // Reset styles first
+
         fullNameField.setStyle("");
         usernameField.setStyle("");
         passwordField.setStyle("");
@@ -119,7 +119,7 @@ public class AddUserController {
                 alert.setContentText("User added successfully!");
                 alert.showAndWait();
 
-                // Clear fields after success
+
                 fullNameField.clear();
                 usernameField.clear();
                 passwordField.clear();

@@ -54,7 +54,6 @@ public class SessionManager {
         return role;
     }
 
-    // ---------- HELPER ----------
     public boolean isLoggedIn() {
         return userId != 0; // or username != null
     }

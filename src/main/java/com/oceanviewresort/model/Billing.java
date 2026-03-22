@@ -43,7 +43,6 @@ public class Billing {
     public void setTotalAmount(double totalAmount){ this.totalAmount=totalAmount; }
     public void setPaymentStatus(String paymentStatus){ this.paymentStatus=paymentStatus; }
 
-    // Getter and Setter for guestName
     public String getGuestName() {
         return guestName;
     }
@@ -52,7 +51,6 @@ public class Billing {
         this.guestName = guestName;
     }
 
-    // Getter and Setter for roomNumber
     public int getRoomNumber() {
         return roomNumber;
     }
@@ -61,7 +59,6 @@ public class Billing {
         this.roomNumber = roomNumber;
     }
 
-    // Getter and Setter for checkInDate
     public LocalDate getCheckInDate() {
         return checkInDate;
     }
@@ -70,7 +67,6 @@ public class Billing {
         this.checkInDate = checkInDate;
     }
 
-    // Getter and Setter for checkOutDate
     public LocalDate getCheckOutDate() {
         return checkOutDate;
     }
@@ -79,7 +75,6 @@ public class Billing {
         this.checkOutDate = checkOutDate;
     }
 
-    // Getter and Setter for pricePerNight
     public double getPricePerNight() {
         return pricePerNight;
     }

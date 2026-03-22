@@ -2,6 +2,8 @@ package com.oceanviewresort.controller;
 
 import com.oceanviewresort.dao.impl.ReservationDAOImpl;
 import com.oceanviewresort.model.Reservation;
+import com.oceanviewresort.service.EmailService;
+import com.oceanviewresort.service.ReservationService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -50,6 +52,9 @@ public class ReservationsController {
     @FXML
     private TableColumn<Reservation, Void> colCancel;
 
+    @FXML
+    private TableColumn<Reservation, String> colGuestEmail;
+
     private ObservableList<Reservation> reservationList = FXCollections.observableArrayList();
 
     @FXML
@@ -57,6 +62,7 @@ public class ReservationsController {
 
         colReservationID.setCellValueFactory(new PropertyValueFactory<>("reservationID"));
         colGuestName.setCellValueFactory(new PropertyValueFactory<>("guestName"));
+        colGuestEmail.setCellValueFactory(new PropertyValueFactory<>("guestEmail"));
         colRoomID.setCellValueFactory(new PropertyValueFactory<>("roomID"));
         colRoomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
         colCheckIn.setCellValueFactory(new PropertyValueFactory<>("checkInDate"));
@@ -71,6 +77,8 @@ public class ReservationsController {
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filterReservations(newValue);
         });
+
+
     }
 
     private void loadReservations() {
@@ -167,13 +175,11 @@ public class ReservationsController {
 
                     try {
 
-                        ReservationDAOImpl dao =
-                                new ReservationDAOImpl();
+                        ReservationService service = new ReservationService();
 
-                        dao.updateStatus(
-                                reservation.getReservationID(),
-                                "Cancelled"
-                        );
+                        service.registerObserver(new EmailService());
+
+                        service.cancelReservation(reservation);
 
                         loadReservations();
 

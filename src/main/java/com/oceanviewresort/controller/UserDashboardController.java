@@ -45,7 +45,6 @@ public class UserDashboardController {
         userRoleLabel.setText("Welcome, " + username + " | Role: " + role);
     }
 
-    // ------------------- LOAD VIEWS -------------------
     private void loadView(String fxml) {
         try {
             Parent view = FXMLLoader.load(getClass().getResource("/view/" + fxml));
@@ -56,22 +55,19 @@ public class UserDashboardController {
     }
 
     @FXML private void loadHome() {
-        loadAvailableRooms();       // load available rooms
-        loadAvailableDiscounts();   // load discounts under rooms
+        loadAvailableRooms();
+        loadAvailableDiscounts();
     }
 
-    // ------------------- LOGOUT -------------------
     @FXML
     private void logout(javafx.event.ActionEvent event) {
         try {
             // Clear session
             SessionManager.getInstance().clearSession();
 
-            // Load login view
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LoginView.fxml"));
             Parent loginRoot = loader.load();
 
-            // Get current stage from the button that triggered the event
             javafx.scene.Node source = (javafx.scene.Node) event.getSource();
             javafx.stage.Stage stage = (javafx.stage.Stage) source.getScene().getWindow();
 
@@ -86,13 +82,11 @@ public class UserDashboardController {
         }
     }
 
-    // ------------------- LOAD AVAILABLE ROOMS -------------------
     private void loadAvailableRooms() {
         if (availableRoomsPane == null) return;
 
         availableRoomsPane.getChildren().clear();
 
-        // Group by room type to count available rooms of each type
         String sql = "SELECT roomType, COUNT(*) AS availableCount, bedCount, pricePerNight " +
                 "FROM Room WHERE status = 'Available' " +
                 "GROUP BY roomType, bedCount, pricePerNight";
@@ -111,7 +105,6 @@ public class UserDashboardController {
                 card.setPrefWidth(220);
                 card.setPrefHeight(150);
 
-                // Base clean style
                 card.setStyle(
                         "-fx-background-color: white;" +
                                 "-fx-padding: 18;" +
@@ -121,7 +114,6 @@ public class UserDashboardController {
                                 "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10,0,0,4);"
                 );
 
-                // 🔹 Room Type (Title)
                 Label typeLabel = new Label(roomType);
                 typeLabel.setStyle(
                         "-fx-font-size: 17px;" +
@@ -129,21 +121,18 @@ public class UserDashboardController {
                                 "-fx-text-fill: #2c3e50;"
                 );
 
-                // 🔹 Availability (important → colored)
                 Label countLabel = new Label("Available: " + availableCount);
                 countLabel.setStyle(
                         "-fx-font-size: 13px;" +
-                                "-fx-text-fill: #27ae60;"   // green = available
+                                "-fx-text-fill: #27ae60;"
                 );
 
-                // 🔹 Beds
                 Label bedLabel = new Label("Beds: " + beds);
                 bedLabel.setStyle(
                         "-fx-font-size: 13px;" +
                                 "-fx-text-fill: #7f8c8d;"
                 );
 
-                // 🔹 Price (highlighted)
                 Label priceLabel = new Label("$" + price + " / night");
                 priceLabel.setStyle(
                         "-fx-font-size: 15px;" +
@@ -153,7 +142,6 @@ public class UserDashboardController {
 
                 card.getChildren().addAll(typeLabel, countLabel, bedLabel, priceLabel);
 
-                // 🔥 HOVER EFFECT (premium feel)
                 card.setOnMouseEntered(e -> {
                     card.setStyle(
                             "-fx-background-color: #f9fbfd;" +
@@ -188,7 +176,6 @@ public class UserDashboardController {
         }
     }
 
-    // ------------------- LOAD AVAILABLE DISCOUNTS -------------------
     private void loadAvailableDiscounts() {
         if (availableDiscountPane == null) return;
 
@@ -203,7 +190,6 @@ public class UserDashboardController {
             card.setPrefWidth(200);
             card.setPrefHeight(140);
 
-            // Base style (clean + modern)
             card.setStyle(
                     "-fx-background-color: white;" +
                             "-fx-padding: 15;" +
@@ -213,7 +199,6 @@ public class UserDashboardController {
                             "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 10,0,0,4);"
             );
 
-            // Title (Discount Code)
             Label codeLabel = new Label(discount.getCode());
             codeLabel.setStyle(
                     "-fx-font-size: 16px;" +
@@ -221,7 +206,6 @@ public class UserDashboardController {
                             "-fx-text-fill: #2c3e50;"
             );
 
-            // Description
             Label descLabel = new Label(discount.getDescription());
             descLabel.setStyle(
                     "-fx-font-size: 12px;" +
@@ -229,7 +213,6 @@ public class UserDashboardController {
             );
             descLabel.setWrapText(true);
 
-            // Percentage (highlighted)
             Label percentLabel = new Label(discount.getPercentage() + "% OFF");
             percentLabel.setStyle(
                     "-fx-font-size: 14px;" +
@@ -237,7 +220,6 @@ public class UserDashboardController {
                             "-fx-text-fill: #27ae60;"
             );
 
-            // Valid dates
             Label validLabel = new Label(
                     discount.getValidFrom() + " → " + discount.getValidTo()
             );
@@ -248,7 +230,6 @@ public class UserDashboardController {
 
             card.getChildren().addAll(codeLabel, descLabel, percentLabel, validLabel);
 
-            // HOVER EFFECT
             card.setOnMouseEntered(e -> {
                 card.setStyle(
                         "-fx-background-color: #f9fbfd;" +

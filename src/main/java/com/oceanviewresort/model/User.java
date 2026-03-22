@@ -26,7 +26,6 @@ public class User {
         this.contactNumber = contactNumber;
     }
 
-    // Getters and Setters
     public int getUserID() { return userID; }
     public void setUserID(int userID) { this.userID = userID; }
 

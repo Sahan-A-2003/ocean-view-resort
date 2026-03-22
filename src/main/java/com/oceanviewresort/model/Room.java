@@ -32,7 +32,6 @@ public class Room {
         return nights * pricePerNight;
     }
 
-    // Getters and Setters
     public int getRoomID() { return roomID; }
     public void setRoomID(int roomID) { this.roomID = roomID; }
 
