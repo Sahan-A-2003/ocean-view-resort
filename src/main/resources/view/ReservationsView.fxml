@@ -37,6 +37,7 @@
             <columns>
                 <TableColumn fx:id="colReservationID" text="Reservation ID"/>
                 <TableColumn fx:id="colGuestName" text="Guest Name"/>
+                <TableColumn text="Guest Email" fx:id="colGuestEmail"/>
                 <TableColumn fx:id="colRoomID" text="Room Number"/>
                 <TableColumn fx:id="colRoomType" text="Room Type"/>
                 <TableColumn fx:id="colCheckIn" text="Check In"/>

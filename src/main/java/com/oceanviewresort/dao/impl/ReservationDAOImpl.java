@@ -19,24 +19,25 @@ public class ReservationDAOImpl implements ReservationDAO {
     @Override
     public boolean addReservation(Reservation r) {
 
-        String sql = "INSERT INTO reservation " +
-                "(userID, roomID, guestName, address, contact, roomType, " +
-                "checkInDate, checkOutDate, numberOfRooms, numberOfGuests, status) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO reservation\n" +
+                "(userID, roomID, guestName, guestEmail, address, contact, roomType,\n" +
+                " checkInDate, checkOutDate, numberOfRooms, numberOfGuests, status)\n" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
 
             stmt.setInt(1, r.getUserID());
             stmt.setInt(2, r.getRoomID());
             stmt.setString(3, r.getGuestName());
-            stmt.setString(4, r.getAddress());
-            stmt.setString(5, r.getContact());
-            stmt.setString(6, r.getRoomType());
-            stmt.setDate(7, Date.valueOf(r.getCheckInDate()));
-            stmt.setDate(8, Date.valueOf(r.getCheckOutDate()));
-            stmt.setInt(9, r.getNumberOfRooms());
-            stmt.setInt(10, r.getNumberOfGuests());
-            stmt.setString(11, r.getStatus());
+            stmt.setString(4, r.getGuestEmail());
+            stmt.setString(5, r.getAddress());
+            stmt.setString(6, r.getContact());
+            stmt.setString(7, r.getRoomType());
+            stmt.setDate(8, Date.valueOf(r.getCheckInDate()));
+            stmt.setDate(9, Date.valueOf(r.getCheckOutDate()));
+            stmt.setInt(10, r.getNumberOfRooms());
+            stmt.setInt(11, r.getNumberOfGuests());
+            stmt.setString(12, r.getStatus());
 
             return stmt.executeUpdate() > 0;
 
@@ -89,6 +90,7 @@ public class ReservationDAOImpl implements ReservationDAO {
                 r.setRoomID(rs.getInt("roomID"));
                 r.setRoomType(rs.getString("roomType"));
                 r.setGuestName(rs.getString("guestName"));
+                r.setGuestEmail(rs.getString("guestEmail"));
 
                 r.setCheckInDate(rs.getDate("checkInDate").toLocalDate());
                 r.setCheckOutDate(rs.getDate("checkOutDate").toLocalDate());
@@ -202,16 +204,17 @@ public class ReservationDAOImpl implements ReservationDAO {
     }
 
     public boolean updateReservation(Reservation r) {
-        String sql = "UPDATE reservation SET guestName=?, roomID=?, roomType=?, checkInDate=?, checkOutDate=?, numberOfRooms=?, numberOfGuests=? WHERE reservationID=?";
+        String sql = "UPDATE reservation SET guestName=?,guestEmail=?, roomID=?, roomType=?, checkInDate=?, checkOutDate=?, numberOfRooms=?, numberOfGuests=? WHERE reservationID=?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, r.getGuestName());
-            ps.setInt(2, r.getRoomID());
-            ps.setString(3, r.getRoomType());
-            ps.setDate(4, java.sql.Date.valueOf(r.getCheckInDate()));
-            ps.setDate(5, java.sql.Date.valueOf(r.getCheckOutDate()));
-            ps.setInt(6, r.getNumberOfRooms());
-            ps.setInt(7, r.getNumberOfGuests());
-            ps.setInt(8, r.getReservationID());
+            ps.setString(2, r.getGuestEmail());
+            ps.setInt(3, r.getRoomID());
+            ps.setString(4, r.getRoomType());
+            ps.setDate(5, java.sql.Date.valueOf(r.getCheckInDate()));
+            ps.setDate(6, java.sql.Date.valueOf(r.getCheckOutDate()));
+            ps.setInt(7, r.getNumberOfRooms());
+            ps.setInt(8, r.getNumberOfGuests());
+            ps.setInt(9, r.getReservationID());
 
             return ps.executeUpdate() > 0;
 
@@ -240,6 +243,7 @@ public class ReservationDAOImpl implements ReservationDAO {
                 reservation.setReservationID(rs.getInt("reservationID"));
                 reservation.setRoomID(rs.getInt("roomID"));
                 reservation.setGuestName(rs.getString("guestName"));
+                reservation.setGuestEmail(rs.getString("guestEmail"));
 
                 reservation.setCheckInDate(
                         rs.getDate("checkInDate").toLocalDate()

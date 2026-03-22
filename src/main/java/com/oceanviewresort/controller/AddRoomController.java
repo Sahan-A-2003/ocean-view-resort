@@ -85,7 +85,7 @@ public class AddRoomController {
         }
 
         Room room = new Room(
-                0,          // roomID auto-generated
+                0,
                 roomType,
                 roomNumber,
                 bedCount,
@@ -104,7 +104,7 @@ public class AddRoomController {
                 alert.setContentText("Room added successfully!");
                 alert.showAndWait();
 
-                // Clear fields
+
                 roomNumberField.clear();
                 roomTypeBox.setValue(null);
                 bedCountField.clear();

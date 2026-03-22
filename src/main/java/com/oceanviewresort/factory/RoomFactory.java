@@ -18,7 +18,6 @@ public class RoomFactory {
                 paymentStatus, description);
     }
 
-    // ✅ ADD THIS METHOD
     public static Room createRoom(String roomType) {
 
         switch (roomType.toUpperCase()) {

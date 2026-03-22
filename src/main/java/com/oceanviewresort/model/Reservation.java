@@ -7,6 +7,7 @@ public class Reservation {
     private int reservationID;
     private int userID;
     private int roomID;
+    private String guestEmail;
 
     private String guestName;
     private String address;
@@ -23,7 +24,7 @@ public class Reservation {
 
     public Reservation() {}
 
-    public Reservation(int userID, int roomID, String guestName,
+    public Reservation(int userID, int roomID, String guestName,String guestEmail,
                        String address, String contact, String roomType,
                        LocalDate checkInDate, LocalDate checkOutDate,
                        int numberOfRooms, int numberOfGuests, String status) {
@@ -31,6 +32,7 @@ public class Reservation {
         this.userID = userID;
         this.roomID = roomID;
         this.guestName = guestName;
+        this.guestEmail = guestEmail;
         this.address = address;
         this.contact = contact;
         this.roomType = roomType;
@@ -41,18 +43,16 @@ public class Reservation {
         this.status = status;
     }
 
-    // Business Logic
     public int calculateNights() {
         return (int)(checkOutDate.toEpochDay() - checkInDate.toEpochDay());
     }
-
-    // Getters and Setters
 
     public int getReservationID() { return reservationID; }
     public void setReservationID(int reservationID) { this.reservationID = reservationID; }
 
     public int getUserID() { return userID; }
     public int getRoomID() { return roomID; }
+    public String getGuestEmail() { return guestEmail; }
 
     public String getGuestName() { return guestName; }
     public String getAddress() { return address; }
@@ -81,6 +81,8 @@ public class Reservation {
         this.guestName = guestName;
     }
 
+    public void setGuestEmail(String guestEmail) { this.guestEmail = guestEmail; }
+
     public void setRoomType(String roomType) {
         this.roomType = roomType;
     }
@@ -97,4 +99,8 @@ public class Reservation {
 
 
     public void setNumberOfGuests(int numberOfGuests) {this.numberOfGuests = numberOfGuests;}
+
+    public void setAddress(String address) {this.address = address;}
+
+    public void setContact(String contact) {this.contact = contact; }
 }

@@ -2,6 +2,8 @@ package com.oceanviewresort.controller;
 
 import com.oceanviewresort.dao.impl.ReservationDAOImpl;
 import com.oceanviewresort.model.Reservation;
+import com.oceanviewresort.service.EmailService;
+import com.oceanviewresort.service.ReservationService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -15,6 +17,9 @@ public class EditReservationController {
 
     @FXML
     private TextField roomIDField;
+
+    @FXML
+    private TextField guestEmailField;
 
     @FXML
     private ComboBox<String> roomTypeComboBox;
@@ -42,7 +47,7 @@ public class EditReservationController {
     @FXML
     public void initialize() {
         // Populate room type options
-        roomTypeComboBox.getItems().addAll("Standard", "Deluxe", "Site View");
+        roomTypeComboBox.getItems().addAll("Standard", "Deluxe", "Suite");
     }
 
     public void setReservation(Reservation reservation) {
@@ -59,6 +64,7 @@ public class EditReservationController {
             statusField.setDisable(true);
 
             guestNameField.setText(reservation.getGuestName());
+            guestEmailField.setText(reservation.getGuestEmail());
             roomIDField.setText(String.valueOf(reservation.getRoomID()));
             roomTypeComboBox.setValue(reservation.getRoomType());
             checkInDatePicker.setValue(reservation.getCheckInDate());
@@ -72,6 +78,7 @@ public class EditReservationController {
     private void handleSave() {
         // Reset styles
         guestNameField.setStyle("");
+        guestEmailField.setStyle("");
         roomIDField.setStyle("");
         roomTypeComboBox.setStyle("");
         checkInDatePicker.setStyle("");
@@ -84,6 +91,9 @@ public class EditReservationController {
 
         if (guestNameField.getText().isEmpty()) {
             guestNameField.setStyle("-fx-border-color:red;");
+            valid = false;
+        } if (guestEmailField.getText().isEmpty()) {
+            guestEmailField.setStyle("-fx-border-color:red;");
             valid = false;
         }
         if (roomIDField.getText().isEmpty()) {
@@ -134,6 +144,7 @@ public class EditReservationController {
 
         try {
             reservation.setGuestName(guestNameField.getText());
+            reservation.setGuestEmail(guestEmailField.getText());
             reservation.setRoomID(Integer.parseInt(roomIDField.getText()));
             reservation.setRoomType(roomTypeComboBox.getValue());
             reservation.setCheckInDate(checkInDatePicker.getValue());
@@ -141,16 +152,28 @@ public class EditReservationController {
             reservation.setNumberOfRooms(Integer.parseInt(numberOfRoomsField.getText()));
             reservation.setNumberOfGuests(Integer.parseInt(numberOfGuestsField.getText()));
 
-            ReservationDAOImpl dao = new ReservationDAOImpl();
-            dao.updateReservation(reservation);
+            // ✅ USE SERVICE
+            ReservationService service = new ReservationService();
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Success");
-            alert.setContentText("Reservation updated successfully!");
-            alert.showAndWait();
+            // 🔥 REGISTER EMAIL
+            service.registerObserver(new EmailService());
 
-            Stage stage = (Stage) guestNameField.getScene().getWindow();
-            stage.close();
+            boolean success = service.editReservation(reservation);
+
+            if (success) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success");
+                alert.setContentText("Reservation updated successfully!");
+                alert.showAndWait();
+
+                Stage stage = (Stage) guestNameField.getScene().getWindow();
+                stage.close();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Update failed!");
+                alert.showAndWait();
+            }
+
 
         } catch (NumberFormatException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

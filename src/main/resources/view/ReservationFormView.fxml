@@ -38,67 +38,55 @@
                        promptText="Enter guest name"
                        GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-            <!-- Address -->
-            <Label text="Address:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-            <TextField fx:id="addressField"
-                       promptText="Enter address"
+            <!-- Guest Email -->
+            <Label text="Guest Email:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="guestEmailField"
+                       promptText="Enter guest email"
                        GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-            <!-- Contact -->
-            <Label text="Contact Number:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-            <TextField fx:id="contactField"
-                       promptText="Enter contact number"
+            <!-- Address -->
+            <Label text="Address:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="addressField"
+                       promptText="Enter address"
                        GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-            <!-- Room Type -->
-            <Label text="Room Type:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-            <ComboBox fx:id="roomTypeBox" prefWidth="200" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+            <!-- Contact -->
+            <Label text="Contact Number:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="contactField"
+                       promptText="Enter contact number"
+                       GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
+            <!-- Room Type -->
+            <Label text="Room Type:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="roomTypeBox" prefWidth="200" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
 
             <!-- Check In -->
-            <Label text="Check-In Date:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-            <DatePicker fx:id="checkInPicker"
-                        GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+            <Label text="Check-In Date:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <DatePicker fx:id="checkInPicker" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
 
             <!-- Check Out -->
-            <Label text="Check-Out Date:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-            <DatePicker fx:id="checkOutPicker"
-                        GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+            <Label text="Check-Out Date:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+            <DatePicker fx:id="checkOutPicker" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
 
             <!-- Rooms -->
-            <Label text="Number of Rooms:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-            <Spinner fx:id="roomsSpinner"
-                     prefWidth="120"
-                     GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+            <Label text="Number of Rooms:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+            <Spinner fx:id="roomsSpinner" prefWidth="120" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
 
             <!-- Guests -->
-            <Label text="Number of Guests:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
-            <Spinner fx:id="guestsSpinner"
-                     prefWidth="120"
-                     GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+            <Label text="Number of Guests:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+            <Spinner fx:id="guestsSpinner" prefWidth="120" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
 
             <!-- Room ID -->
-            <Label text="Room ID:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
-            <ComboBox fx:id="roomIdBox"
-                      promptText="Select available Room ID"
-                      prefWidth="200"
-                      GridPane.rowIndex="8"
-                      GridPane.columnIndex="1"/>
+            <Label text="Room ID:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="roomIdBox" promptText="Select available Room ID" prefWidth="200" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
 
             <!-- SAVE BUTTON -->
-            <Button text="Save Reservation"
-                    prefWidth="200"
-                    style="-fx-font-size: 14px; -fx-font-weight: bold;"
-                    onAction="#handleSaveReservation"
-                    GridPane.rowIndex="9"
-                    GridPane.columnIndex="1"/>
+            <Button text="Save Reservation" prefWidth="200" style="-fx-font-size: 14px; -fx-font-weight: bold;"
+                    onAction="#handleSaveReservation" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
 
             <!-- MESSAGE LABEL -->
-            <Label fx:id="messageLabel"
-                   text=""
-                   style="-fx-text-fill: red; -fx-font-weight: bold;"
-                   GridPane.rowIndex="10"
-                   GridPane.columnIndex="1"/>
+            <Label fx:id="messageLabel" text="" style="-fx-text-fill: red; -fx-font-weight: bold;"
+                   GridPane.rowIndex="11" GridPane.columnIndex="1"/>
 
         </GridPane>
 

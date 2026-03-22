@@ -10,6 +10,7 @@
         <columns>
             <TableColumn text="ID" fx:id="colID"/>
             <TableColumn text="Guest Name" fx:id="colGuest"/>
+            <TableColumn text="Guest Email" fx:id="colGuestEmail"/>
             <TableColumn text="Room Type" fx:id="colRoomType"/>
             <TableColumn text="Check In" fx:id="colCheckIn"/>
             <TableColumn text="Check Out" fx:id="colCheckOut"/>
