@@ -121,7 +121,6 @@ public class AdminPanelController {
         }
     }
 
-    // USER MANAGEMENT VIEW
     @FXML
     private void showUserManagement() {
 
@@ -171,11 +170,10 @@ public class AdminPanelController {
     private void openAddRoomPopup() {
 
         try {
-            // Load the AddRoom FXML
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddRoomView.fxml"));
             Parent root = loader.load();
 
-            // Create a new stage for the popup
             Stage stage = new Stage();
             stage.setTitle("Add Room");
 
@@ -189,22 +187,19 @@ public class AdminPanelController {
         }
     }
 
-    // ROOM MANAGEMENT VIEW
     @FXML
     private void showRoomManagement() {
 
         contentContainer.getChildren().clear();
 
-        // Add Room Button at the top-right
         Button addRoomBtn = new Button("Add Room");
         addRoomBtn.getStyleClass().add("add-btn");
-        addRoomBtn.setOnAction(e -> openAddRoomPopup()); // define popup like AddUser
+        addRoomBtn.setOnAction(e -> openAddRoomPopup());
 
         FlowPane roomPane = new FlowPane();
         roomPane.setHgap(20);
         roomPane.setVgap(20);
 
-        // Load rooms from DB
         List<Room> rooms = roomDAO.getAllRooms();
 
         for (Room room : rooms) {
@@ -223,7 +218,6 @@ public class AdminPanelController {
             roomPane.getChildren().add(card);
         }
 
-        // Show Add Room button at the top
         contentContainer.getChildren().addAll(addRoomBtn, roomPane);
     }
 
@@ -240,7 +234,7 @@ public class AdminPanelController {
 
             roomDAO.deleteRoom(roomID);
 
-            showRoomManagement(); // Reload the room management view
+            showRoomManagement();
         }
     }
 }

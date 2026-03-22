@@ -1,6 +1,9 @@
 package com.oceanviewresort.controller;
 
 import com.oceanviewresort.config.DBConnection;
+import com.oceanviewresort.model.Reservation;
+import com.oceanviewresort.service.EmailService;
+import com.oceanviewresort.service.ReservationService;
 import com.oceanviewresort.util.SessionManager;
 
 import javafx.collections.FXCollections;
@@ -17,6 +20,8 @@ import java.time.LocalDate;
 public class ReservationFormController {
 
     @FXML private TextField guestNameField;
+    @FXML
+    private TextField guestEmailField;
     @FXML private TextField addressField;
     @FXML private TextField contactField;
     @FXML private ComboBox<String> roomTypeBox;
@@ -89,8 +94,8 @@ public class ReservationFormController {
     @FXML
     private void handleSaveReservation() {
         try {
-            // 1️⃣ Validate required fields
             if (guestNameField.getText().isEmpty() ||
+                    guestEmailField.getText().isEmpty() ||
                     contactField.getText().isEmpty() ||
                     roomTypeBox.getValue() == null ||
                     checkInPicker.getValue() == null ||
@@ -101,69 +106,39 @@ public class ReservationFormController {
                 return;
             }
 
-            // 2️⃣ Parse numeric fields safely
-            Integer roomID = roomIdBox.getValue();
-            if (roomID == null) {
-                messageLabel.setText("Please select a room!");
-                return;
+            Reservation reservation = new Reservation();
+
+            reservation.setUserID(SessionManager.getInstance().getUserId());
+            reservation.setRoomID(roomIdBox.getValue());
+            reservation.setGuestName(guestNameField.getText());
+            reservation.setGuestEmail(guestEmailField.getText());
+            reservation.setAddress(addressField.getText());
+            reservation.setContact(contactField.getText());
+            reservation.setRoomType(roomTypeBox.getValue());
+            reservation.setCheckInDate(checkInPicker.getValue());
+            reservation.setCheckOutDate(checkOutPicker.getValue());
+            reservation.setNumberOfRooms(roomsSpinner.getValue());
+            reservation.setNumberOfGuests(guestsSpinner.getValue());
+
+            // ✅ USE SERVICE INSTEAD OF DAO
+            ReservationService service = new ReservationService();
+
+            // 🔥 REGISTER EMAIL SERVICE
+            service.registerObserver(new EmailService());
+
+            boolean success = service.createReservation(reservation);
+
+            if (success) {
+                messageLabel.setText("Reservation saved successfully!");
+                Stage stage = (Stage) guestNameField.getScene().getWindow();
+                stage.close();
+            } else {
+                messageLabel.setText("Not enough rooms available!");
             }
-            int numberOfRooms = roomsSpinner.getValue();
-            int numberOfGuests = guestsSpinner.getValue();
-            int userID = SessionManager.getInstance().getUserId();
-
-            LocalDate checkIn = checkInPicker.getValue();
-            LocalDate checkOut = checkOutPicker.getValue();
-
-            String guestName = guestNameField.getText();
-            String address = addressField.getText();
-            String contact = contactField.getText();
-            String roomType = roomTypeBox.getValue();
-
-            // 3️⃣ Insert into database
-            Connection conn = DBConnection.getInstance().getConnection();
-            String sql = """
-                    INSERT INTO reservation
-                    (userID, roomID, guestName, address, contact, roomType,
-                     checkInDate, checkOutDate, numberOfRooms, numberOfGuests, status)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                    """;
-
-            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setInt(1, userID);
-                stmt.setInt(2, roomID);
-                stmt.setString(3, guestName);
-                stmt.setString(4, address);
-                stmt.setString(5, contact);
-                stmt.setString(6, roomType);
-                stmt.setDate(7, java.sql.Date.valueOf(checkIn));
-                stmt.setDate(8, java.sql.Date.valueOf(checkOut));
-                stmt.setInt(9, numberOfRooms);
-                stmt.setInt(10, numberOfGuests);
-                stmt.setString(11, "Booked");
-
-                stmt.executeUpdate();
-
-                String updateRoomSql = "UPDATE Room SET status = 'Booked' WHERE roomID = ?";
-                try (PreparedStatement stmt2 = conn.prepareStatement(updateRoomSql)) {
-                    stmt2.setInt(1, roomID);
-                    stmt2.executeUpdate();
-                }
-            }
-
-
-            messageLabel.setText("Reservation saved successfully!");
-
-            Stage stage = (Stage) guestNameField.getScene().getWindow();
-            stage.close();
-
-            System.out.println("Reservation Saved Successfully!");
-
-            // Optional: Clear form
-            clearForm();
 
         } catch (Exception e) {
             e.printStackTrace();
-            messageLabel.setText("Error saving reservation! Check console.");
+            messageLabel.setText("Error saving reservation!");
         }
     }
 
